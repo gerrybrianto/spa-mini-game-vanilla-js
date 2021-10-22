@@ -1,64 +1,56 @@
-import Square from "./square.js";
-
 export default class {
-  constructor(gridSize, grid = []) {
-    this.gridSize = gridSize;
+  constructor(
+    gridSize = 10,
+    grid = [],
+    nbInaccessibleSquares = 0,
+    player1 = {},
+    player2 = {},
+    items = []
+  ) {
+    this.gridSize = gridSize * gridSize;
+    console.log(this.gridSize);
     this.grid = grid;
+    this.nbInaccessibleSquares = nbInaccessibleSquares;
+    this.player1 = player1;
+    this.player2 = player2;
+    this.items = items;
   }
 
   get gridSize() {
     return this._gridSize;
   }
+  get grid() {
+    return this._grid;
+  }
+  get nbInaccessibleSquares() {
+    return this._nbInaccessibleSquares;
+  }
+  get player1() {
+    return this._player1;
+  }
+  get player2() {
+    return this._player2;
+  }
+  get items() {
+    return this._items;
+  }
 
+  set grid(grid) {
+    this._grid = grid;
+  }
+  set nbInaccessibleSquares(nbInaccessibleSquares) {
+    this._nbInaccessibleSquares = nbInaccessibleSquares;
+  }
   set gridSize(gridSize) {
     this._gridSize = gridSize;
   }
-
-  createGrid() {
-    const markup = `
-        <div class="container" id="container" style="
-          display: grid;
-          margin: auto;
-          border: 1px black solid;
-          height: 90%;
-          width: 90%;
-        ">
-        </div> `;
-    document.body.innerHTML += markup;
+  set player1(player1) {
+    this._player1 = player1;
   }
-
-  layoutGrid() {
-    const container = document.getElementById("container");
-    container.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;
-    container.style.gridTemplateRows = `repeat(${this.gridSize}, 1fr)`;
+  set player2(player2) {
+    this._player2 = player2;
   }
-
-  traceGrid() {
-    const tracer = Array(this.gridSize * this.gridSize).keys();
-    for (let i of tracer) {
-      const square = new Square(i, "empty", true);
-      square.traceSquare();
-      this.grid.push(square);
-    }
-  }
-
-  randomlyFillGrid(numOfBlocks, color) {
-    const container = document.getElementById("container");
-    const filler = Array(numOfBlocks).keys();
-    for (let i of filler) {
-      const markup = `<div class="card" id="card ${i}" 
-                                   style="grid-column: ${
-                                     Math.floor(Math.random() * this.gridSize) +
-                                     1
-                                   } / span 1; 
-                                          grid-row: ${
-                                            Math.floor(
-                                              Math.random() * this.gridSize
-                                            ) + 1
-                                          } / span 1;
-                                          background-color: ${color};
-                                          ">${i}</div>`;
-      container.innerHTML += markup;
-    }
+  set items(items) {
+    this._items = items;
   }
 }

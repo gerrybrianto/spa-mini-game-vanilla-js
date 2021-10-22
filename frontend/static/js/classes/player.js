@@ -1,8 +1,13 @@
 export default class {
-  constructor(health = 100, position, weapon) {
+  constructor(health = 100, position, weapon, id) {
     this.health = health;
     this.position = position;
     this.weapon = weapon;
+    this.id = id;
+  }
+
+  get id() {
+    return this._id;
   }
 
   get position() {
@@ -17,6 +22,10 @@ export default class {
     return this._weapon;
   }
 
+  set id(id) {
+    this._id = id;
+  }
+
   set position(position) {
     this._position = position;
   }
@@ -27,17 +36,5 @@ export default class {
 
   set weapon(weapon) {
     this._weapon = weapon;
-  }
-
-  movePlayer(id, direction, nbSquares) {}
-
-  generatePlayer(id) {
-    const container = document.getElementById("container");
-    const markup = `<div class="card" id="player ${id}"
-    style="grid-column: ${Math.floor(Math.random() * 10) + 1} / span 1; 
-            grid-row: ${Math.floor(Math.random() * 10) + 1} / span 1;
-            background-color: blue;
-           " ></div>`;
-    container.innerHTML += markup;
   }
 }
